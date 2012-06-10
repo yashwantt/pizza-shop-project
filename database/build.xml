@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- database utilities 
+  Requires JDK's bin and ant's bin on command-line's path (check that javac 
+      and ant work on the command line)
+  Requires env variables ORACLE_USER, ORACLE_PW, ORACLE_SITE, MYSQL_USER, MYSQL_PW 
+ -->
+<project name="pizza4 DBhelpers">
+	<!--Load environment variables and give them prefix "env." -->
+	<!-- ORACLE_SITE should be "localhost:2222:dbs2" at home (for putty
+		tunnel to dbs2.cs.umb.edu), and "dbs2.cs.umb.edu:1521:dbs2" at cs.umb.edu -->
+	<property environment="env" />
+
+	<path id="project.classpath">
+		<pathelement location="../lib/hsqldb.jar" />
+	</path>
+
+	<!-- ==========================HSQLDB helpers================== -->
+	<!-- Unlike Oracle, HSQLDB comes and goes at our whim. We start it up when we
+			want to use it, leave it running in a process while we do our testing,
+			and then bring it down.  Each time we bring it up, we make it start off
+			empty, so we need to load the tables before running the app.
+		-->
+	<!-- Start the HSQL DB server: do this before running apps -->
+	<target name="start-hsqldb" description="Run HSQL database server">
+		<!-- Delete HSQLDB's database script and log, its record of past actions -->
+		<delete file="test.script" />
+		<delete file="test.log" />
+		<copy file="hsqldb_startup.script" tofile="test.script" overwrite="true" />
+		<java classname="org.hsqldb.Server" fork="yes" classpathref="project.classpath" failonerror="true">
+		</java>
+	</target>
+
+	<target name="shutdown-hsqldb" description="Shutdown HSQL database">
+		<sql classpathref="project.classpath" driver="org.hsqldb.jdbcDriver" 
+			url="jdbc:hsqldb:hsql://localhost/" userid="sa" password="" 
+			autocommit="true">shutdown</sql>
+	</target>
+
+	<target name="load-hsqldb" description="Load HSQL database">
+		<sql classpathref="project.classpath" driver="org.hsqldb.jdbcDriver" 
+			url="jdbc:hsqldb:hsql://localhost/" userid="sa" password="" src="createdb.sql" />
+	</target>
+	<target name="show-hsqldb" description="Show  HSQL database ">
+		<sql classpathref="project.classpath" driver="org.hsqldb.jdbcDriver" 
+			url="jdbc:hsqldb:hsql://localhost/" userid="sa" password="" src="showdb.sql" print="true" />
+	</target>
+	<target name="drop-hsqldb" description="Drop HSQL database">
+		<sql classpathref="project.classpath" driver="org.hsqldb.jdbcDriver" 
+			url="jdbc:hsqldb:hsql://localhost/" userid="sa" password="" src="dropdb.sql" 
+			onerror="continue" />
+	</target>
+
+	  <target name="dbmgr">
+	    
+	  <!--	<java fork="true" dir="." classname="org.hsqldb.util.DatabaseManager">
+	      <classpath>
+	        <pathelement path="${spring.home}/lib/hsqldb/hsqldb.jar"/>
+	      </classpath>
+	    </java>	-->
+	  	
+	    <java classname="org.hsqldb.util.DatabaseManager" fork="yes" classpathref="project.classpath" failonerror="true" />	
+	    
+	  </target>
+	
+</project>

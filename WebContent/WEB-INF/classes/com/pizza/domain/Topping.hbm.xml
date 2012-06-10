@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.pizza.domain.Topping" table="TOPPINGS">
+        
+        <id name="id" type="long">
+            <column name="ID" />
+            <generator class="increment"/>
+        </id>
+        
+        
+<!-- 		<version name='version' access='field' column='version' /> -->
+     
+        <property name="name" type="string">
+            <column name="TOPPING_NAME" length="30" not-null="true" unique="true" />
+        </property>
+        
+        <property name="type" type="com.pizza.domain.Topping$ToppingType$ToppingTypeUserType">
+            <column name="type" not-null="true" />
+        </property>
+
+        <property name="logo" column="logo" />
+        <property name="active" not-null='true'/>
+        
+     </class>
+</hibernate-mapping>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<binding xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:noNamespaceSchemaLocation="http://jibx.cvs.sourceforge.net/jibx/core/docs/binding.xsd?revision=1.5"
+	value-style="attribute"  direction="input" name="input_ValidationType">
+
+  <namespace prefix="iet" uri="http://pizza.com/IET/2007/12" default="elements"/>
+  <include path='ValidationType.jibxinc.xml' />
+  <mapping class="com.pizza.bean.jibx.BeanListHolder" name="pz-data">
+  	<structure name="metadata"/>
+  	<collection set-method="setList" factory="org.jibx.runtime.Utility.arrayListFactory"/>
+  </mapping>
+
+</binding>

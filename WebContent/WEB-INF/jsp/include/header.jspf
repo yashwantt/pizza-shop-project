@@ -1,0 +1,13 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<jsp:useBean id='now' class='java.util.Date' scope='request' />
+<%@page contentType='text/html;charset=utf-8' %>
+<%@page errorPage='/WEB-INF/jsp/error.jsp' %>
+
+<%@include file='/WEB-INF/jsp/include/taglib.jspf' %>
+<%@include file='/WEB-INF/jsp/include/uiConfiguration.jspf' %>
+
+<html xmlns='http://www.w3.org/1999/xhtml' style="visibility: hidden;" >
+<head>
+

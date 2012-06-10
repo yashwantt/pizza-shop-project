@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- com pizza4 build file:
+  Requires JDK's bin and ant's bin on command-line's path
+  Requires junit.jar on the command line's CLASSPATH (for <junit> tasks)
+  Requires CATALINA_HOME environment variable
+    to locate tomcat on this system, for deployment of the web app, and jars
+  For execution of its JSPs, requires jstl.jar and standard.jar in WEB-INF/lib
+  For successful in-tomcat DB use, requires account info in tomcat's conf/context.xml
+  For successful testing outside tomcat, requires account info in testApplicationContext.xml
+ -->
+<project name="pizza4S" basedir=".">
+	<!--Load environment variables and give them prefix "env." -->
+	<property environment="env" />
+	<!--It's good practice to pick up env vars at the start of build.xml -->
+	<!--another way to do settings like this is by properties files -->
+	<property name="CATALINA_HOME" value="${env.CATALINA_HOME}" />
+	<property name="webinf" value="WebContent/WEB-INF" />
+	<!--the web app name, or "context path" of the web app
+	     forms part of the URL for the app -->
+	<property name="webappname" value="${ant.project.name}" />
+
+	<path id="project.classpath">
+		<pathelement location="${webinf}/classes" />
+		<!-- for JUnit testing (done locally, not under tomcat, so not deployed) -->
+		<pathelement location="lib/junit.jar" />
+		<pathelement location="lib/hsqldb.jar" />
+		<!--for building servlets (NOT deployed, tomcat has servlet jars) -->
+		<pathelement location="${CATALINA_HOME}/lib/servlet-api.jar" />
+		<!-- needed for the non-JNDI DataSource used for the system test: -->
+		<fileset dir="lib">
+			<include name="**/*.jar" />
+		</fileset>
+		<!-- the following (stored under WebContent) are deployed with the app 
+         and are also needed for building it -->
+		<fileset dir="${webinf}/lib">
+			<include name="**/*.jar" />
+		</fileset>
+		<pathelement location="${CATALINA_HOME}/lib/servlet-api.jar" />
+	</path>
+
+	<property name="build.classes.dir" value="WebContent/WEB-INF/classes" />
+
+	<path id="build.classpath">
+		<fileset dir="WebContent/WEB-INF/lib">
+			<include name="*.jar" />
+		</fileset>
+	</path>
+
+	<target name="start-hsqldb" description="Run HSQL database server">
+		<!-- Delete HSQLDB's database script and log, its record of past actions -->
+		<delete file="database/test.script" />
+		<delete file="database/test.log" />
+		<copy file="database/hsqldb_startup.script" tofile="database/test.script" overwrite="true" />
+		<java classname="org.hsqldb.Server" fork="yes" classpathref="project.classpath" failonerror="true">
+		</java>
+	</target>
+
+	<target name="shutdown-hsqldb" description="Shutdown HSQL database">
+		<sql classpathref="project.classpath" driver="org.hsqldb.jdbcDriver" url="jdbc:hsqldb:hsql://localhost/" userid="sa" password="" autocommit="true">shutdown</sql>
+	</target>
+
+
+	<target name="load-hsqldb" description="Load HSQL database">
+		<sql classpathref="project.classpath" driver="org.hsqldb.jdbcDriver" url="jdbc:hsqldb:hsql://localhost/" userid="sa" password="" src="database/createdb.sql" />
+	</target>
+	<target name="show-hsqldb" description="Show  HSQL database ">
+		<sql classpathref="project.classpath" driver="org.hsqldb.jdbcDriver" url="jdbc:hsqldb:hsql://localhost/" userid="sa" password="" src="database/showdb.sql" print="true" />
+	</target>
+	<target name="drop-hsqldb" description="Drop HSQL database">
+		<sql classpathref="project.classpath" driver="org.hsqldb.jdbcDriver" url="jdbc:hsqldb:hsql://localhost/" userid="sa" password="" src="database/dropdb.sql" onerror="continue" />
+	</target>
+
+	<target name="dbmgr">
+		<java classname="org.hsqldb.util.DatabaseManager" fork="yes" classpathref="project.classpath" failonerror="true" />
+	</target>
+
+	<taskdef name="bind" classname="org.jibx.binding.ant.CompileTask" classpathref="build.classpath" />
+
+	<target name="jibx_build">
+		<bind verbose="true" load="true">
+			<bindingfileset dir=".">
+				<include name="src/com/pizza/bean/validation/ValidationType_In.jibx.xml" />
+			</bindingfileset>
+			<classpath>
+				<pathelement path="${build.classes.dir}" />
+				<pathelement location="lib/jibx-run.jar" />
+			</classpath>
+		</bind>
+	</target>
+
+</project>

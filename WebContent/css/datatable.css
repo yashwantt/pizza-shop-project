@@ -1,0 +1,77 @@
+
+/* datatable styles */
+
+/* row stuff */
+.DataTable tr { background-color: #fff;}
+.DataTable tr.odd { background-color: #EFF3F7;}
+.DataTable.selectable tr:HOVER { background-color: #D1E8FF; }
+.DataTable.selectable tr.selected, 
+.DataTable.selectable tr.selected:HOVER { background-color: #FFFDBE; }
+
+.DataTable tr.emptyRow { cursor: default; }
+.DataTable tr.emptyRow:HOVER { background-color: #fff;}
+.DataTable tr.emptyRow.odd:HOVER { background-color: #EFF3F7;}
+
+/* cell stuff */
+.DataTable th {
+	font: 11px Verdana, Arial, Helvetica, sans-serif;
+	font-weight:  bold;
+	color: #5B6B7B;
+	background-color: #a4b5a4;
+	height: 26px;
+	line-height: 12px;
+	vertical-align: middle;
+}
+.DataTable td {
+	font: 11px  Verdana, Arial, Helvetica, sans-serif;
+	color: #313336;
+	height: 26px;
+	line-height: 26px;
+	vertical-align: middle;
+}
+
+.DataTable tbody.empty tr.eMessage td {
+	color:#5B6B7B;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size:11px;
+	font-style:italic;
+	padding-left: 10px;
+}
+
+.DataTable td.delete { width: 47px; }
+.dj_webkit .DataTable td.delete { width: 13%; } 
+.DataTable td.delete a {
+		padding-left:15px;
+	    font: bold 10px 'Trebuchet MS', Georgia, Arial, Helvetica, sans-serif; 
+	    background: transparent url(../images/icons/ICON_XS_Delete.png) no-repeat scroll 0 center;
+}
+
+/* code and desc are the most common column classes, these are default widths, they may have to be tweaked for particular tables.
+ * To override: table#myTableId tr > .code { width: newWidth; }  */
+.DataTable tr > .code { width: 23%; }
+.DataTable tr > .desc { width: 56%; }
+
+/*.DataTable th.code, .DataTable td.code{ width: 57px; }
+.DataTable th.date, .DataTable td.date{ width: 90px; }
+*/
+
+.DataTable tbody.empty td { padding-left: 15px; }
+
+
+/* sidebar table styles */
+
+table.sidebar tr { background-color: transparent; }
+table.sidebar td { 
+	border-bottom: 1px solid #D9E2EA;
+	font: 11px Tahoma, Verdana, Helvetica, sans-serif;
+	height: 26px;
+	line-height: 26px;
+	vertical-align: middle;
+}
+
+.specialMessage {
+	font: 11px Verdana, Arial, Helvetica, sans-serif;
+	color: #313336;
+	margin:10px;
+	}
+

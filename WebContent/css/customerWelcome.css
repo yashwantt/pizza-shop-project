@@ -1,0 +1,141 @@
+
+#orderCont {
+	color: #505050;
+	position: relative;
+}
+
+#meatWrapper {
+	float: left;
+}
+
+#meatTitle,#vegTitle,.chosenText,#addressCont,#submitPizza, #resetPizza {
+	color: #827E72;
+	font-size: 1.3em;
+	font-weight: bold;
+}
+
+#meatTitle,#vegTitle,.chosenText {
+	margin-bottom: 10px;
+}
+
+#meatCheeseToppings1 {
+	padding-right: 10px;
+	float: left;
+}
+
+#meatCheeseToppings2 {
+	padding-right: 10px;
+	float: right;
+}
+
+#vegWrapper {
+	float: right;
+}
+
+#vegToppings1 {
+	padding-right: 10px;
+	float: left;
+}
+
+#vegToppings2 {
+	float: right;
+}
+
+#pizzaSizeId {
+	display: block;
+	margin-bottom: 20px;
+	width: 100px;
+	text-align: center;
+}
+
+#pizzaSizeId span,#pizzaSizeId .dijitMenuItem,#pizzaSizeId .dijitSelectMenu .dijitMenuItemLabel,#pizzaSizeId .dijitSelectMenu .dijitMenuArrowCell
+	{
+	width: 90px;
+	text-align: center;
+}
+
+.toppingItem {
+	width: 50px;
+	margin-bottom: 16px;
+	cursor: pointer;
+}
+
+.formContainer {
+	width: 600px;
+	height: 600px;
+}
+
+label {
+	width: 150px;
+	float: left;
+}
+
+#chosenItems {
+	margin-left: 270px;
+}
+
+#pizzaSize {
+	font-weight: bold;
+}
+
+#pizzaToppings {
+	font-weight: bold;
+}
+
+.toppingName {
+	color: #037b41;
+	font-size: .9em;
+}
+
+.toppingItem:hover .toppingName {
+	color: #ba142c;
+}
+
+#submitPizza, #restPizza {
+	width: 147px;
+	/* 	 		font-size: 1.3em; */
+	/* 	 		font-weight: bold; */
+	/* 	 		color: #464646; */
+}
+
+[widgetId=submitPizza]  {
+	left: 388px;
+	position: absolute;
+	top: 310px;
+}
+
+[widgetId=resetPizza]  {
+	left: 200px;
+	position: absolute;
+	top: 310px;
+}
+
+#placeOrderMssg {
+	left: 250px;
+	position: absolute;
+	top: 355px;
+}
+#addressCont>div {
+	margin-bottom: 12px;
+}
+
+.error {
+    color: #FF6767;
+    font-family: Verdana,Arial,Helvetica,sans-serif;
+    font-size: 11px;
+    font-weight: normal;
+    margin-top: 3px;
+}
+
+#statusCont .regText {
+	margin-left: 20px;
+}
+
+#statusCont #customerAddress {
+	margin-top: 5px;
+	margin-left: 30px;
+}
+
+#ordersReport {
+	height: 400px !important;
+}

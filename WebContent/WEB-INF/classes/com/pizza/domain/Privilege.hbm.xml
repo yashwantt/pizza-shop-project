@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- reveng.hbmxml creates a <set> for the many PizzaOrders for a size, but
+    we have no need of such a set, so we drop it here -->
+<hibernate-mapping>
+    <class name="com.pizza.domain.Privilege" table="PRIVILEGE" >
+        <id name="id" type="long">
+            <column name="ID" />
+            <generator class="increment"/>
+        </id>
+		
+        <property name="accountId" type="string">
+            <column name="account_id" length="30" not-null="true" />
+        </property>
+        
+        <property name="privilege" type="string">
+            <column name="privilege" length="30" not-null="true" />
+        </property>
+        
+      </class>
+</hibernate-mapping>

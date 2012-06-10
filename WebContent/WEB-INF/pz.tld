@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+
+<taglib
+	xmlns='http://java.sun.com/xml/ns/javaee'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd'
+	version='2.1'>
+
+	<description>Pizza taglibs that cannot be represented as .tag files.</description>
+	<tlib-version>1.0</tlib-version>
+	<short-name>pz</short-name>
+	<uri>http://pizza.com/tags</uri>
+
+	<tag>
+		<description>Escapes a value for use as a Javascript value.</description>
+		<name>jsVal</name>
+		<tag-class>com.pizza.ui.taglib.JSValueTag</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<description>value to escape</description>
+			<name>value</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+ 		<dynamic-attributes>false</dynamic-attributes>
+	</tag>
+
+
+</taglib>

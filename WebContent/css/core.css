@@ -1,0 +1,5 @@
+/* Core styles, imported on every page. */
+/* Please consult Tom before changing the list of core CSS files below */
+@import url("/css/pizza.css");
+@import url('widgets/table/Table.css');
+@import url('datatable.css');
