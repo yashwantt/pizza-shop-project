@@ -1,0 +1,137 @@
+<%@taglib prefix='pz' uri='/WEB-INF/pz.tld' %>
+<c:set var='ctxPath' value='${pageContext.request.contextPath}' />
+
+<%-- 
+	Debug mode is configured: in include/uiConfiguration.jspf
+--%>
+<script type='text/javascript' >
+	// Frame busting code, as recommended by "Busting Frame Busting: A Study of
+	// Clickjacking Vulnerabilities on Popular Sites", by Rydstedt, Bursztein,
+	// Boneh, and Jackson, May 25, 2010
+	if (self == top) {
+		document.documentElement.style.visibility = "visible";
+	}
+	else {
+		top.location = self.location;
+	}
+
+	<%-- pizza namespace initialization and basic bootstrapping. --%>
+	<%-- Always needs to be first thing loaded.                      
+	--%>var pizza = {<%-- 
+			--%>config: {},<%--
+			--%>session: {},<%--
+			--%>MESSAGES: {<%--
+			--%>  msgStore: []<%--
+			--%>},<%--
+			--%>context: {<%--
+			--%>  addObject: function(key, value) {<%--
+			--%>    this[key] = value;<%--
+			--%>  }<%--		
+			--%>},<%--
+			--%>_requires: [],<%--
+			--%>_valData: null,<%--
+			 	needed to store onload functions that are dynamically generated(i.e. in tags) before dojo lib is loaded.
+			 	Only use for special cases. Dont take advantage.    
+		    --%>_onLoads: [],<%--
+		    flag indicating that the core pizza modules have loaded
+		    --%>_loaded: false<%--
+	--%>};<%--
+	
+	test this right away 
+	--%>if(typeof cookieAlert === 'undefined'){
+			if(!document.cookie.length){
+				document.cookie = "pizza.cookie-test=true";
+				if(document.cookie.indexOf("pizza.cookie-test=true") == -1){
+					document.location = 'cookieAlert.htm';
+				}
+			}
+		}<%-- 
+
+--%>if (djConfig == undefined) {
+		
+		var djConfig = {
+			parseOnLoad: false,
+			usePlainJson: true,
+			isDebug: false,
+			contextPath: '${ctxPath}/',
+			dojoBlankHtmlUrl: 'about:blank',
+			modulePaths: {
+				pizza: '../../pizza'
+			}
+		};
+	}
+
+	pizza.config.CONTEXT_PATH = '${ctxPath}/';
+
+	
+	<c:set var='imagePrefix'>
+		<c:choose>
+			<c:when test='${cssDebug}'>'${ctxPath}/images/'</c:when>
+			<c:otherwise>'${ctxPath}/static/'+ pizza.config.release + '/images/'</c:otherwise>
+		</c:choose>
+	</c:set><%--
+
+
+	// Set a flag when window.onload has fired
+	(function() {
+		window.__window_loaded = false;
+		var ool = null;
+		var f = function() {
+			window.__window_loaded = true;
+			if (ool) ool();
+		};
+		if (window.addEventListener) {
+			window.addEventListener("load", f, false);
+		}
+		else if (window.attachEvent) {
+			window.attachEvent("onload", f);
+		}
+		else {
+			ool = window.onload;
+			window.onload = f;
+		}
+	})();
+
+<%-- This logic is done by JSP, not JS so that it is not exposed to user --%>
+<c:choose>
+	<c:when test='${isCustomer}'><%--
+		--%>pizza.session.userType = 'customer';
+	</c:when>
+	<c:when test='${isAdmin}'><%--
+		--%>pizza.session.userType = 'admin';
+	</c:when>
+	<c:otherwise><%--
+	--%>pizza.session.userType = 'anon';
+ 	</c:otherwise>	
+</c:choose>
+
+
+
+
+</script>
+
+<c:if test='${not empty validatedFields}'>
+	<script type='text/javascript'>
+		pizza._valData = ${validatedFields};	
+	</script>
+</c:if>
+
+<script type="text/javascript" src="/dojoroot/dojo/dojo.js"  djConfig="parseOnLoad: true,isDebug:false"></script>
+
+
+	<script type="text/javascript">
+
+		<c:forEach items="${context}" var="c" varStatus="entryStatus">
+			pizza.context.addObject(<pz:jsVal value="${c.key}" />, <pz:jsVal value="${c.value}" />);
+		</c:forEach>
+		<c:forEach items="${contextJSON}" var="c" varStatus="entryStatus">
+			pizza.context.addObject("${c.key}", ${c.value});
+		</c:forEach>
+	</script>
+
+
+<script type='text/javascript' src='/generated/anon.js'></script>
+
+
+<!-- <script type='text/javascript' src='/dojoroot/dojo.js' ></script> -->
+<script type='text/javascript' src='/pizza/pizza.js' ></script> 

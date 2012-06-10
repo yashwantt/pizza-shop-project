@@ -1,0 +1,148 @@
+.strong {
+	font-weight: bold;
+}
+
+body {
+	background-color: #576a57;
+}
+
+.header2 {
+	width: auto;
+	background-color: #5c725c;
+	padding-left: 8px;
+	text-align: left;
+	font: bold 14px/28px 'Trebuchet MS', Georgia, Arial, Helvetica,	sans-serif;
+	color: #FFF;
+}
+
+.pizzaLogo {
+	background: url(../../images/pizza-logo.png) no-repeate center center;
+	margin-bottom: -49px;
+	margin-left: 37px;
+}
+
+.regText {
+	color: #827E72;
+	font-size: 1.3em;
+	font-weight: bold;
+}
+
+#topNav {
+	background-color: #015009;
+	height: 52px;
+	margin-left: 185px;
+	padding: 3px 0 0 10px;
+	width: 617px;
+
+	/* 		  border: 2px solid red; */
+}
+
+table#topNav {
+	text-align: center;
+	border-collapse: collapse;
+}
+
+#topNav td {
+	border: 0.5px solid #606060;
+}
+
+#topNav img {
+	/* 			background-image: url("../../images/pizza-logo.png"); */
+	width: 60%;
+	/* 			height: 60%; */
+}
+
+#topNav a {
+	margin: .5em;
+	font-weight: bold;
+	font-size: 1.5em;
+	padding: 0 15px;
+	width: 140px;
+}
+
+#topNav a:link,#topNav a:visited {
+	text-decoration: none;
+	color: white;
+}
+
+#topNav a:hover,#topNav a:active {
+	text-decoration: none;
+	color: #e11837;
+}
+
+#topNav a.selected {
+	color: #e11837;
+}
+
+
+.wrapper {
+	width: 800px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.hideme {
+	display: none;
+}
+
+.loading {
+	background: url(../../images/ajaxIndicator.gif) no-repeat center center;
+	height: 100px;
+}
+
+.mainCont {
+	height: 400px;
+	background-color: #f5eccf;
+	padding: 30px;
+}
+
+form input[type='text'], form input[type='password'] {
+	height: 22px;
+	width: 236px;
+}
+
+.exceptionPage .outerBox {
+	background-color: #015009;
+	margin-top: 175px;
+	padding: 12px 3px 3px;
+	width: 385px;
+}
+
+.exceptionPage .innerBox {
+	background-color: #f5eccf;
+	min-height: 135px;
+}
+
+.exceptionPage .imageContainer {
+	background-image: url("../images/error.jpg");
+	background-repeat: no-repeat;
+	float: left;
+	height: 177px;
+	margin: -38px 8px -8px -28px;
+	width: 180px;
+}
+
+.exceptionPage .textContainer { /*     float: left; */
+	margin: 3px 10px 0 0;
+	padding-top: 14px;
+	color: #333;
+	/*     width: 204px; */
+}
+
+.exceptionPage .textContainer div {
+	padding-bottom: 5px;
+}
+
+.exceptionPage .errorMessage {
+	font-size: 22px;
+	margin-bottom: 5px;
+}
+
+div.buttonRegion {
+    clear: both;
+    height: 37px;
+    margin-left: 0;
+    padding-bottom: 6px;
+    padding-top: 19px;
+    width: 100%;
+}

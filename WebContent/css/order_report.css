@@ -1,0 +1,31 @@
+.mainCont {
+	height: 550px;
+}
+
+#ordersReport {
+ 	width: 700px; 
+ 	height: 600px !important; 
+	font-size: 1.1em;
+ 	margin-top: 33px;
+ 	margin-right:auto;
+ 	margin-left: auto;
+}
+
+#ordersReport .dojoxGridScrollbox {
+		background-color: #F5ECCF;
+}
+
+#ordersReport .dojoxGridScrollbox {
+	overflow-x: hidden;
+}
+
+.filterCont div {
+	padding-bottom: 20px;
+}
+
+.filterCont .label {
+	float: left;
+	margin-right: 35px;
+	width: 120px;
+	text-align: right;
+}

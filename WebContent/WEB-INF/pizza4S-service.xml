@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+       
+<beans
+	xmlns='http://www.springframework.org/schema/beans'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xmlns:jee='http://www.springframework.org/schema/jee'
+	xmlns:aop='http://www.springframework.org/schema/aop'
+	xmlns:tx='http://www.springframework.org/schema/tx'
+	xsi:schemaLocation='http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd'>
+		    
+ 
+<!--  	<aop:aspectj-autoproxy proxy-target-class="true" /> -->
+ 
+	<!-- Business Objects -->
+
+	<bean id="adminService" class="com.pizza.service.AdminService">
+		<constructor-arg index="0" ref="adminDao" />
+		<constructor-arg index="1" ref="pizzaOrderDao" />
+		<constructor-arg index="2" ref="pizzaJdbcDao" />
+	</bean>
+
+
+	<bean id="customerService" class="com.pizza.service.CustomerService">
+		<constructor-arg index="0" ref="pizzaOrderDao" />
+		<constructor-arg index="1" ref="pizzaJdbcDao" />
+	</bean>
+
+</beans>

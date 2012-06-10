@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xmlns:aop="http://www.springframework.org/schema/aop"
+           xmlns:p='http://www.springframework.org/schema/p'
+           xsi:schemaLocation="http://www.springframework.org/schema/beans 
+             http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+                       http://www.springframework.org/schema/aop 
+            http://www.springframework.org/schema/aop/spring-aop-2.0.xsd">
+
+
+	<bean class='com.pizza.spring.SpringContext' factory-method='instance' />
+
+	<bean id='startupTaskListener' class='com.pizza.startup.StartupTaskListener'/>
+
+	<bean id='baseStartupAction' abstract='true' />
+	
+	<bean id='validationTypeJSPopulator' class='com.pizza.startup.ValidationTypeJsPopulator'
+		parent='baseStartupAction' 
+		p:validationService-ref = 'validationService'
+	/>
+  
+  	<bean id='validationService' class='com.pizza.validation.ValidationServiceImpl'
+	/>
+	
+	<bean id='dataObjectValidator' class="com.pizza.validation.DataObjectValidator"
+		p:validationService-ref = "validationService"  
+	/> 
+	
+	<bean id="resourceManager" class='com.pizza.dao.ResourceManager' factory-method='instance'
+	/>
+	
+</beans>
+

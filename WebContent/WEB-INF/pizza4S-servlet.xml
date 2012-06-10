@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans
+	xmlns='http://www.springframework.org/schema/beans'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xmlns:aop='http://www.springframework.org/schema/aop'
+	xmlns:tx='http://www.springframework.org/schema/tx'
+	xsi:schemaLocation='http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd'>
+		
+
+	<bean name="customerWelcomeController" class="com.pizza.mvc.customer.CustomerWelcomeController" >
+		<property name="customerService" ref="customerService" />
+		<property name='validationService' ref='validationService' />
+		<property name='validators'>
+			<list>
+				<ref bean='dataObjectValidator' />
+			</list>
+		</property>
+	</bean>
+	
+
+	<bean name="homeAsyncController" class="com.pizza.mvc.customer.HomeAsyncController" >
+		<property name="customerService" ref="customerService" />
+	</bean>
+	
+	<bean name="imageAsyncController" class="com.pizza.mvc.customer.ImageAsyncController" >
+		<property name="customerService" ref="customerService" />
+	</bean>	
+	
+	
+	<bean name='loginAdminController' 
+	class="org.springframework.web.servlet.mvc.UrlFilenameViewController"/>
+	
+	
+	<bean id="adminWelcomeController"
+		class="com.pizza.mvc.admin.AdminWelcomeController">
+		<property name="adminService" ref="adminService" />
+	</bean>	
+	
+	
+	<bean name="ordersAjaxController" class="com.pizza.mvc.admin.OrdersAjaxController" >
+		<property name="adminService" ref="adminService" />
+	</bean>
+	
+	
+	<bean name="changeProductAsyncController" class="com.pizza.mvc.admin.ChangeProductAsyncController" >
+		<property name="adminService" ref="adminService" />
+	</bean>	
+	
+	
+	<bean name='addPizzaSizeController'
+		class='com.pizza.mvc.admin.AddPizzaSizeController'>
+		<property name='formView' value='popups/addPizzaSizePopup' />
+		<property name='adminService' ref='adminService' />
+	</bean>
+	
+	<bean name='addPizzaToppingController'
+		class='com.pizza.mvc.admin.AddPizzaToppingController'>
+		<property name='formView' value='popups/addPizzaToppingPopup' />
+		<property name='adminService' ref='adminService' />
+	</bean>	
+
+
+ 	<bean id="errorController" 
+      class="org.springframework.web.servlet.mvc.UrlFilenameViewController"/>	
+	
+ 	
+ 	
+	<bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="mappings">
+			<props>
+				<prop key="/customerWelcome.htm">customerWelcomeController</prop>
+				<prop key="/customer/async/getSizes.htm">homeAsyncController</prop>
+				<prop key="/customer/async/getToppings.htm">homeAsyncController</prop>
+				<prop key="/customer/async/getSizes.htm">homeAsyncController</prop>
+				<prop key="/getCustomerOrders.htm">homeAsyncController</prop>
+				<prop key="/async/getToppingImage.ajax">imageAsyncController</prop>
+								
+
+				<prop key='/login.htm'>loginAdminController</prop> 
+				<prop key="/admin_welcome.htm">adminWelcomeController</prop>
+				<prop key="/getAllOrders.htm">ordersAjaxController</prop>
+				<prop key="/changeOrderStatus.htm">ordersAjaxController</prop>
+				<prop key="/admin/initialize_db.htm">changeProductAsyncController</prop>
+				<prop key="/admin/activatePizzaSize.htm">changeProductAsyncController</prop>
+				<prop key="/admin/deactivatePizzaSize.htm">changeProductAsyncController</prop>
+				<prop key="/admin/activatePizzaTopping.htm">changeProductAsyncController</prop>
+				<prop key="/admin/deactivatePizzaTopping.htm">changeProductAsyncController</prop>
+				<prop key="/admin/addPizzaSize.htm">addPizzaSizeController</prop>
+				<prop key="/admin/addPizzaTopping.htm">addPizzaToppingController</prop>
+				
+		        <prop key="/error.htm">errorController</prop>
+				
+			</props>
+		</property>
+	</bean>
+
+
+	<bean id="multipartResolver"
+	    class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+	    <property name="maxUploadSize" value="100000"/>
+	</bean>
+
+
+	<!-- The view resolver definition. Use to resolve (map) view names to actual 
+		jsp files -->
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix">
+			<value>/WEB-INF/jsp/</value>
+		</property>
+		<property name="suffix">
+			<value>.jsp</value>
+		</property>
+		<property name="viewClass">
+			<value>org.springframework.web.servlet.view.JstlView</value>
+		</property>
+	</bean>
+
+	<!-- -->
+	<bean id="messageSource"
+		class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basenames">
+			<list>
+				<value>messages</value>
+				<value>errors</value>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="exceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+	<property name="exceptionMappings">
+	<props>
+	<prop key="java.lang.Exception">error</prop>
+	</props>
+	</property>
+	</bean>
+
+</beans>
+

@@ -1,0 +1,49 @@
+.active {
+	color: #009C00;
+}
+
+[widgetId=initialize_db] {
+    font: bold 12px 'Trebuchet MS',Georgia,Arial,Helvetica,sans-serif !important;
+    height: 20px;
+    cursor: pointer;
+    text-align: left;
+    color: #000;
+}
+
+[widgetId=addNewSizeBtn], [widgetId=addNewToppingBtn]{
+    float: right;
+    margin-right: 10px;
+    font: bold 12px 'Trebuchet MS',Georgia,Arial,Helvetica,sans-serif !important;
+    height: 20px;
+    cursor: pointer;
+    text-align: left;
+    color: #000;
+}
+
+.header2 {
+	margin-top: 20px;
+}
+
+.toppingImage {
+	width: 31px;
+}
+
+
+.fieldName {
+    float: left;
+    line-height: 21px;
+    margin-right: 10px;
+    text-align: right;
+    width: 110px;
+}
+
+.fieldValue {
+    line-height: 21px;
+    margin-left: 120px;
+    padding-bottom: 7px;
+    text-align: left;
+}
+
+.mainCont {
+    height: 775px;
+}
